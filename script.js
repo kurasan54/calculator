@@ -45,125 +45,8 @@ function operate(num1, num2, operator){
         return subtract(num1, num2);
     }
 }
-let operandIsPicked = false;
-let storedValue = 0;
-let iPickedEqual = false;
 
 
-function updateOperand(string){
-    if(string == "*")
-    {
-        operation = "*";
-        operandIsPicked = true;
-
-        //this allows the numbers to operate and then assign that total to the first number (as if it was selected)
-        if (iPickedEqual)
-        {
-            iPickedEqual = false;
-            display.textContent = operate(storedValue, secondN, operation);
-            firstN = storedValue;
-            pairOne = true;
-        }
-        else{
-            display.textContent = operate(firstN, secondN, operation);
-            firstN = operate(firstN, secondN, operation); 
-        }
-        
-        //this resets the second number and initiate that the first number is now the current total value
-        secondN = 0;
-        pairOne = true;
-        
-        //this resets the second number and initiate that the first number is now the current total value
-        secondN = 0;
-        pairOne = true;
-    }
-
-    if(string == "/")
-    {
-        operation = "/";
-        operandIsPicked = true;
-
-        //this allows the numbers to operate and then assign that total to the first number (as if it was selected)
-        if (iPickedEqual)
-        {
-            iPickedEqual = false;
-            display.textContent = operate(storedValue, secondN, operation);
-            firstN = storedValue;
-            pairOne = true;
-        }
-        else{
-            display.textContent = operate(firstN, secondN, operation);
-            firstN = operate(firstN, secondN, operation); 
-        }
-        
-        //this resets the second number and initiate that the first number is now the current total value
-        secondN = 0;
-        pairOne = true;
-        
-        //this resets the second number and initiate that the first number is now the current total value
-        secondN = 0;
-        pairOne = true;
-    }
-
-    if(string == "+")
-    {
-        operation = "+";
-        operandIsPicked = true;
-
-        //this allows the numbers to operate and then assign that total to the first number (as if it was selected)
-        if (iPickedEqual)
-        {
-            iPickedEqual = false;
-            display.textContent = operate(storedValue, secondN, operation);
-            firstN = storedValue;
-            pairOne = true;
-        }
-        else{
-            display.textContent = operate(firstN, secondN, operation);
-            firstN = operate(firstN, secondN, operation); 
-        }
-        
-        //this resets the second number and initiate that the first number is now the current total value
-        secondN = 0;
-        pairOne = true;
-    }
-
-    if(string == "-")
-    {
-        operation = "-";
-        operandIsPicked = true;
-
-        //this allows the numbers to operate and then assign that total to the first number (as if it was selected)
-        if (iPickedEqual)
-        {
-            iPickedEqual = false;
-            display.textContent = operate(storedValue, secondN, operation);
-            firstN = storedValue;
-            pairOne = true;
-        }
-        else{
-            display.textContent = operate(firstN, secondN, operation);
-            firstN = operate(firstN, secondN, operation); 
-        }
-        
-        //this resets the second number and initiate that the first number is now the current total value
-        secondN = 0;
-        pairOne = true;
-    }
-
-    if (string == "="){
-        //this display the total and then reset both numbers
-        storedValue = operate(firstN, secondN, operation);
-        display.textContent = storedValue
-        iPickedEqual = true;
-        
-        pairOne = false;
-        pairTwo = false;
-        operandIsPicked = false;
-        firstN = 0;
-        secondN = 0;
-    }
-}
 //UPDATE DISPLAY
 function updateDisplay(string){
     display.textContent = string;
@@ -178,39 +61,24 @@ function updateDisplay(string){
     updateOperand(string);
 }
 
-let pairOne = false; //pairtwo can be used to force the operand when doing another pair
-let pairTwo = false;
+
 //UPDATE VALUES
 function updateValues(argument){
-    if (pairOne === true && operandIsPicked)
+    if (pairOne === true)
     {
         pairOne = false;
         secondN = argument;
-        //operandisPicked should be false if = sign is picked, this should also reset the pair values and put the new
-        //value if another operand was picked instead
-                pairTwo = true;
     }
     else{
         pairOne = true;
         firstN = argument;
-
-        //This code below resets and begins a new selection if a number was selected after hitting '='
-        if (iPickedEqual)
-        {
-            pairTwo = false;
-            operandIsPicked = false;
-            iPickedEqual = false;
-        }
-    }
-}
+}}
 
 function clearCalculation(){
     pairOne = false;
     pairTwo = false;
-    operandIsPicked = false;
     firstN = 0;
     secondN = 0;
-    iPickedEqual = false;
     display.textContent = "";
 }
 
