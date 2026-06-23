@@ -158,6 +158,7 @@ function updateValues(argument){
         pairOne = true;
         firstN = argument;
 
+        //This code below resets and begins a new selection if a number was selected after hitting '='
         if (iPickedEqual)
         {
             pairTwo = false;
@@ -165,6 +166,16 @@ function updateValues(argument){
             iPickedEqual = false;
         }
     }
+}
+
+function clearCalculation(){
+    pairOne = false;
+    pairTwo = false;
+    operandIsPicked = false;
+    firstN = 0;
+    secondN = 0;
+    iPickedEqual = false;
+    display.textContent = "";
 }
 
 
@@ -260,6 +271,6 @@ subtractButton.addEventListener("click", () => updateDisplay("-"));
 
 equalButton.addEventListener("click", () => updateDisplay("="));
 
-clearButton.addEventListener("click", () => updateDisplay("C"));
+clearButton.addEventListener("click", () => clearCalculation());
 
 
