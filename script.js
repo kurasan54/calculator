@@ -25,35 +25,95 @@ function add(...numbers){
 
 //OPERATE
 function operate(num1, num2, operator){
-    if(operator == "multiply")
+    if(operator == "*")
     {
-        multiply(num1, num2);
+       return multiply(num1, num2);
     }
 
-    if(operator == "divide")
+    if(operator == "/")
     {
-        divide(num1, num2);
+        return divide(num1, num2);
     }
 
-    if(operator == "add")
+    if(operator == "+")
     {
-        add(num1, num2);
+        return add(num1, num2);
     }
 
-    if(operator == "subtract")
+    if(operator == "-")
     {
-        subtract(num1, num2);
+        return subtract(num1, num2);
     }
 }
+let operandIsPicked = false;
 
+function updateOperand(string){
+    if(string == "*")
+    {
+        operation = "*";
+        operandIsPicked = true;
+    }
+
+    if(string == "/")
+    {
+        operation = "/";
+        operandIsPicked = true;
+
+    }
+
+    if(string == "+")
+    {
+        operation = "+";
+        operandIsPicked = true;
+        display.textContent = operate(firstN, secondN, operation);
+        firstN = operate(firstN, secondN, operation);
+        
+        //this resets
+        secondN = 0;
+        pairOne = true;
+    }
+
+    if(string == "-")
+    {
+        operation = "-";
+        operandIsPicked = true;
+    }
+
+    if (string == "="){
+        display.textContent = operate(firstN, secondN, operation);
+        pairOne = false;
+    }
+}
 //UPDATE DISPLAY
 function updateDisplay(string){
     display.textContent = string;
+
+    //Updates number values 
+    if (Number.isInteger(string))
+    {
+        updateValues(string);
+    }
+
+    //Updates operand values
+    updateOperand(string);
 }
 
+let pairOne = false; //pairtwo can be used to force the operand when doing another pair
 function updateValues(argument){
-
+    if (pairOne === true && operandIsPicked)
+    {
+        pairOne = false;
+        secondN = argument;
+        //operandisPicked should be false if = sign is picked, this should also reset the pair values and put the new
+        //value if another operand was picked instead
+    }
+    else{
+        pairOne = true;
+        firstN = argument;
+    }
 }
+
+
 
 //CSS
 const container = document.querySelector(".document");
