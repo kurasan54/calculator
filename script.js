@@ -1,8 +1,9 @@
 //VARIABLES
-let firstN = 0;
-let secondN = 0;
+let firstN = "";
+let secondN = "";
 let operation = "";
 let displayText = "XXX";
+let pairOne = false;
 
 //BASIC MATH FUNCTIONS
 
@@ -25,61 +26,80 @@ function add(...numbers){
 
 //OPERATE
 function operate(num1, num2, operator){
+    let temp1 = Number(num1);
+    let temp2 = Number(num2);
+
     if(operator == "*")
     {
-       return multiply(num1, num2);
+       return multiply(temp1, temp2);
     }
 
     if(operator == "/")
     {
-        return divide(num1, num2);
+        return divide(temp1, temp2);
     }
 
     if(operator == "+")
     {
-        return add(num1, num2);
+        return add(temp1, temp2);
     }
 
     if(operator == "-")
     {
-        return subtract(num1, num2);
+        return subtract(nutemp1m1, temp2);
     }
 }
 
 
 //UPDATE DISPLAY
 function updateDisplay(string){
-    display.textContent = string;
-
+    let temp = string.toString();
     //Updates number values 
-    if (Number.isInteger(string))
-    {
-        updateValues(string);
-    }
+    updateValues(temp);
 
-    //Updates operand values
-    updateOperand(string);
+    if (pairOne == false)
+    {
+        display.textContent = firstN;
+    }
+    if (pairOne == true)
+    {
+        display.textContent = secondN;
+    }
+    // display.textContent = string;
+}
+
+function updateOperand(string){
+    operation = string;
+    display.textContent = operation;
+    //now we want to change it to 2nd value
+    pairOne = true;
+}
+
+function displayCalculation(){
+    display.textContent = operate(firstN, secondN, operation);
 }
 
 
 //UPDATE VALUES
 function updateValues(argument){
+    if(argument === "0" || argument === 0)
+        return;
+
     if (pairOne === true)
     {
-        pairOne = false;
-        secondN = argument;
+        // pairOne = false;
+        secondN += argument;
     }
     else{
-        pairOne = true;
-        firstN = argument;
+        firstN += argument;
 }}
 
 function clearCalculation(){
     pairOne = false;
     pairTwo = false;
-    firstN = 0;
-    secondN = 0;
-    display.textContent = "";
+    firstN = '';
+    secondN = '';
+    display.textContent = "0";
 }
 
 
@@ -165,15 +185,15 @@ eightButton.addEventListener("click", () => updateDisplay(8));
 
 nineButton.addEventListener("click", () => updateDisplay(9));
 
-multiplyButton.addEventListener("click", () => updateDisplay("*"));
+multiplyButton.addEventListener("click", () => updateOperand("*"));
 
-divideButton.addEventListener("click", () => updateDisplay("/"));
+divideButton.addEventListener("click", () => updateOperand("/"));
 
-addButton.addEventListener("click", () => updateDisplay("+"));
+addButton.addEventListener("click", () => updateOperand("+"));
 
-subtractButton.addEventListener("click", () => updateDisplay("-"));
+subtractButton.addEventListener("click", () => updateOperand("-"));
 
-equalButton.addEventListener("click", () => updateDisplay("="));
+equalButton.addEventListener("click", () => displayCalculation());
 
 clearButton.addEventListener("click", () => clearCalculation());
 
