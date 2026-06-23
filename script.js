@@ -57,8 +57,21 @@ function updateOperand(string){
         operandIsPicked = true;
 
         //this allows the numbers to operate and then assign that total to the first number (as if it was selected)
-        display.textContent = operate(firstN, secondN, operation);
-        firstN = operate(firstN, secondN, operation);
+        if (iPickedEqual)
+        {
+            iPickedEqual = false;
+            display.textContent = operate(storedValue, secondN, operation);
+            firstN = storedValue;
+            pairOne = true;
+        }
+        else{
+            display.textContent = operate(firstN, secondN, operation);
+            firstN = operate(firstN, secondN, operation); 
+        }
+        
+        //this resets the second number and initiate that the first number is now the current total value
+        secondN = 0;
+        pairOne = true;
         
         //this resets the second number and initiate that the first number is now the current total value
         secondN = 0;
@@ -71,8 +84,21 @@ function updateOperand(string){
         operandIsPicked = true;
 
         //this allows the numbers to operate and then assign that total to the first number (as if it was selected)
-        display.textContent = operate(firstN, secondN, operation);
-        firstN = operate(firstN, secondN, operation);
+        if (iPickedEqual)
+        {
+            iPickedEqual = false;
+            display.textContent = operate(storedValue, secondN, operation);
+            firstN = storedValue;
+            pairOne = true;
+        }
+        else{
+            display.textContent = operate(firstN, secondN, operation);
+            firstN = operate(firstN, secondN, operation); 
+        }
+        
+        //this resets the second number and initiate that the first number is now the current total value
+        secondN = 0;
+        pairOne = true;
         
         //this resets the second number and initiate that the first number is now the current total value
         secondN = 0;
@@ -108,8 +134,17 @@ function updateOperand(string){
         operandIsPicked = true;
 
         //this allows the numbers to operate and then assign that total to the first number (as if it was selected)
-        display.textContent = operate(firstN, secondN, operation);
-        firstN = operate(firstN, secondN, operation);
+        if (iPickedEqual)
+        {
+            iPickedEqual = false;
+            display.textContent = operate(storedValue, secondN, operation);
+            firstN = storedValue;
+            pairOne = true;
+        }
+        else{
+            display.textContent = operate(firstN, secondN, operation);
+            firstN = operate(firstN, secondN, operation); 
+        }
         
         //this resets the second number and initiate that the first number is now the current total value
         secondN = 0;
@@ -145,6 +180,7 @@ function updateDisplay(string){
 
 let pairOne = false; //pairtwo can be used to force the operand when doing another pair
 let pairTwo = false;
+//UPDATE VALUES
 function updateValues(argument){
     if (pairOne === true && operandIsPicked)
     {
