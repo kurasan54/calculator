@@ -4,6 +4,10 @@ let secondN = "";
 let operation = "";
 let displayText = "XXX";
 let pairOne = false;
+let pairTwo = false;
+let storedValue = "";
+let iEqualed = false;
+let operatorStored = "";
 
 //BASIC MATH FUNCTIONS
 
@@ -46,7 +50,7 @@ function operate(num1, num2, operator){
 
     if(operator == "-")
     {
-        return subtract(nutemp1m1, temp2);
+        return subtract(temp1, temp2);
     }
 }
 
@@ -71,23 +75,57 @@ function updateDisplay(string){
 function updateOperand(string){
     operation = string;
     display.textContent = operation;
-    //now we want to change it to 2nd value
+
+    //If you hit an operand before a number after selecting '=', then it won't reset the values.
+    iEqualed = false;
+    
+    //if you hit an operand again, do calculation, store value as n1, display it, and reset n2
+     if (operation != "" && pairTwo === true && secondN != "")
+     {
+        storedValue = operate(firstN, secondN, operatorStored);
+        display.textContent = storedValue;
+        firstN = storedValue;
+        secondN = "";
+        pairTwo = false;
+        // operation = "";
+     }
+
+      //now we want to change it to 2nd value
     pairOne = true;
+    operatorStored = string;
 }
 
 function displayCalculation(){
-    display.textContent = operate(firstN, secondN, operation);
+    storedValue = operate(firstN, secondN, operation);
+    display.textContent = storedValue;
+
+    firstN = storedValue;
+    secondN = "";
+    iEqualed = true;
+    operator = "";
 }
 
 
 //UPDATE VALUES
 function updateValues(argument){
-    if(argument === "0" || argument === 0)
-        return;
+    // if((argument === "0" || argument === 0) && (firstN !== "0" || firstN !== 0))
+    //     return;
+
+    //This make sure after hitting any number after '=', it removes any other value stored from the previous calculation
+    if (iEqualed)
+    {
+        storedValue = "";
+        firstN = "";
+        secondN = "";
+        iEqualed = false;
+        pairOne = false;
+    }
+
 
     if (pairOne === true)
     {
         // pairOne = false;
+        pairTwo = true;
         secondN += argument;
     }
     else{
@@ -95,10 +133,12 @@ function updateValues(argument){
 }}
 
 function clearCalculation(){
+    storedValue = "";
     pairOne = false;
     pairTwo = false;
     firstN = '';
     secondN = '';
+    operatorStored = "";
     display.textContent = "0";
 }
 
