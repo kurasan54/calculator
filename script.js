@@ -2,7 +2,7 @@
 let firstN = "";
 let secondN = "";
 let operation = "";
-let displayText = "XXX";
+let displayText = "0";
 let pairOne = false;
 let pairTwo = false;
 let storedValue = "";
@@ -145,13 +145,32 @@ function clearCalculation(){
 }
 
 
-
 //CSS
 const display = document.createElement('div');
 const grid = document.createElement('div');
+
+//Dispay CSS
+display.style.display = "flex";
+display.style.flexWrap = "wrap";
+display.style.width = "400px";
+display.style.height = "90px";
+display.style.alignContent = "center";
+display.style.justifyContent = "right";
+display.style.paddingRight = "20px";
+display.style.fontSize = "50px";
+display.style.border = "2px solid black";
+display.style.boxSizing = "border-box";
 display.textContent = displayText;
 document.body.appendChild(display);
-// document.body.appendChild(container);
+
+//Body CSS
+document.body.style.display = "flex";
+document.body.style.flexDirection = "column";
+document.body.style.justifyContent = "center";
+document.body.style.alignItems = "center";
+document.body.style.minHeight = "100vh";
+document.body.style.backgroundColor = "#f0f0f0";
+document.body.style.gap = "20px";
 
 //Grid
 const size = 4;
@@ -169,13 +188,14 @@ for (let i = 0; i < size * size; i++) {
     button.style.flexBasis = `${100 / size}%`;
     button.style.height = `${100 / size}%`;
     button.style.boxSizing = "border-box";
+    button.style.fontSize = "25px";
 
     button.addEventListener("click", () => overHaul(i));
 
     grid.appendChild(button);
 }
 
-//Assigns the buttons their respective functions
+//Assigns the buttons their respective text
 function assignText(number)
 {
     switch (number)
