@@ -122,7 +122,6 @@ function updateValues(argument){
         pairOne = false;
     }
 
-
     if (pairOne === true)
     {
         // pairOne = false;
@@ -180,6 +179,7 @@ grid.style.width = "400px";
 grid.style.height = "400px";
 grid.style.border = "1px solid black";
 
+//For loop to create 4x4 grid
 for (let i = 0; i < size * size; i++) {
     const button = document.createElement("button");
 
