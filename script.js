@@ -72,6 +72,7 @@ function updateDisplay(string){
     // display.textContent = string;
 }
 
+//UPDATE OPERAND
 function updateOperand(string){
     operation = string;
     display.textContent = operation;
@@ -94,7 +95,7 @@ function updateOperand(string){
     pairOne = true;
     operatorStored = string;
 }
-
+//EQUAL OPERAND
 function displayCalculation(){
     storedValue = operate(firstN, secondN, operation);
     display.textContent = storedValue;
@@ -132,6 +133,7 @@ function updateValues(argument){
         firstN += argument;
 }}
 
+//CLEAR CALCULATIONS
 function clearCalculation(){
     storedValue = "";
     pairOne = false;
@@ -145,96 +147,130 @@ function clearCalculation(){
 
 
 //CSS
-const container = document.querySelector(".document");
-
 const display = document.createElement('div');
+const grid = document.createElement('div');
 display.textContent = displayText;
 document.body.appendChild(display);
+// document.body.appendChild(container);
 
-const zeroButton = document.createElement('button');
-const oneButton = document.createElement('button');
-const twoButton = document.createElement('button');
-const threeButton = document.createElement('button');
-const fourButton = document.createElement('button');
-const fiveButton = document.createElement('button');
-const sixButton = document.createElement('button');
-const sevenButton = document.createElement('button');
-const eightButton = document.createElement('button');
-const nineButton = document.createElement('button');
-const multiplyButton = document.createElement('button');
-const divideButton = document.createElement('button');
-const addButton = document.createElement('button');
-const subtractButton = document.createElement('button');
-const equalButton = document.createElement('button');
-const clearButton = document.createElement('button');
+//Grid
+const size = 4;
+grid.style.display = "flex";
+grid.style.flexWrap = "wrap";
+grid.style.width = "400px";
+grid.style.height = "400px";
+grid.style.border = "1px solid black";
 
-zeroButton.textContent = "0";
-oneButton.textContent = "1";
-twoButton.textContent = "2";
-threeButton.textContent = "3";
-fourButton.textContent = "4";
-fiveButton.textContent = "5";
-sixButton.textContent = "6";
-sevenButton.textContent = "7";
-eightButton.textContent = "8";
-nineButton.textContent = "9";
-multiplyButton.textContent = "*";
-divideButton.textContent = "/";
-addButton.textContent = "+";
-subtractButton.textContent = "-";
-equalButton.textContent = "=";
-clearButton.textContent = "C";
+for (let i = 0; i < size * size; i++) {
+    const button = document.createElement("button");
 
-document.body.appendChild(zeroButton);
-document.body.appendChild(oneButton);
-document.body.appendChild(twoButton);
-document.body.appendChild(threeButton);
+    button.textContent = assignText(i);
 
-document.body.appendChild(fourButton);
-document.body.appendChild(fiveButton);
-document.body.appendChild(sixButton);
-document.body.appendChild(sevenButton);
+    button.style.flexBasis = `${100 / size}%`;
+    button.style.height = `${100 / size}%`;
+    button.style.boxSizing = "border-box";
 
-document.body.appendChild(eightButton);
-document.body.appendChild(nineButton);
-document.body.appendChild(multiplyButton);
-document.body.appendChild(divideButton);
+    button.addEventListener("click", () => overHaul(i));
 
-document.body.appendChild(addButton);
-document.body.appendChild(subtractButton);
-document.body.appendChild(equalButton);
-document.body.appendChild(clearButton);
+    grid.appendChild(button);
+}
 
-zeroButton.addEventListener("click", () => updateDisplay(0));
+//Assigns the buttons their respective functions
+function assignText(number)
+{
+    switch (number)
+    {
+        case 0:
+            return 7;
+        case 1:
+            return 8;
+        case 2:
+            return 9;
+        case 3:
+            return "+";
+        case 4:
+            return 4;
+        case 5:
+            return 5;
+        case 6:
+            return 6;
+        case 7:
+            return "-";
+        case 8:
+            return 1;
+        case 9:
+            return 2;
+        case 10:
+            return 3;
+        case 11:
+            return "*";
+        case 12:
+            return "C";
+        case 13:
+            return 0;
+        case 14:
+            return "=";
+        case 15:
+            return '/';
+    } 
+}
 
-oneButton.addEventListener("click", () => updateDisplay(1));
+//Assigns the buttons their respective functions
+function overHaul(number)
+{
+    switch (number)
+    {
+        case 0:
+            updateDisplay(7);
+            break;
+        case 1:
+            updateDisplay(8);
+            break;
+        case 2:
+            updateDisplay(9);
+            break;
+        case 3:
+            updateOperand('+');
+            break;
+        case 4:
+            updateDisplay(4);
+            break;
+        case 5:
+            updateDisplay(5);
+            break;
+        case 6:
+            updateDisplay(6);
+            break;
+        case 7:
+            updateOperand('-');
+            break;
+        case 8:
+            updateDisplay(1);
+            break;
+        case 9:
+            updateDisplay(2);
+            break;
+        case 10:
+            updateDisplay(3);
+            break;
+        case 11:
+            updateOperand('*');
+            break;
+        case 12:
+            clearCalculation();
+            break;
+        case 13:
+            updateDisplay(0);
+            break;
+        case 14:
+            displayCalculation();
+            break;
+        case 15:
+            updateOperand('/');
+            break;
+    } 
+}
 
-twoButton.addEventListener("click", () => updateDisplay(2));
-
-threeButton.addEventListener("click", () => updateDisplay(3));
-
-fourButton.addEventListener("click", () => updateDisplay(4));
-
-fiveButton.addEventListener("click", () => updateDisplay(5));
-
-sixButton.addEventListener("click", () => updateDisplay(6));
-
-sevenButton.addEventListener("click", () => updateDisplay(7));
-
-eightButton.addEventListener("click", () => updateDisplay(8));
-
-nineButton.addEventListener("click", () => updateDisplay(9));
-
-multiplyButton.addEventListener("click", () => updateOperand("*"));
-
-divideButton.addEventListener("click", () => updateOperand("/"));
-
-addButton.addEventListener("click", () => updateOperand("+"));
-
-subtractButton.addEventListener("click", () => updateOperand("-"));
-
-equalButton.addEventListener("click", () => displayCalculation());
-
-clearButton.addEventListener("click", () => clearCalculation());
+document.body.appendChild(grid);
 
 
